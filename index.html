@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <title>Creative Marketing Internship – Nibble & BigoLive by Oksana Kolisnyk</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #5da150;
+      margin: 0;
+      padding: 0;
+      color: #437214;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .slides-container {
+      width: 90%;
+      max-width: 1400px;
+      height: 85%;
+      position: relative;
+    }
+
+    .slide {
+      width: 100%;
+      height: 100%;
+      padding: 32px 72px;
+      background: #f2f2f2;
+      box-sizing: border-box;
+      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.12);
+      border-radius: 18px;
+      display: none;
+      opacity: 0;
+      transition: opacity 0.4s ease-in-out;
+      overflow-y: scroll;
+      scroll-behavior: smooth;
+    }
+    
+    .slide::-webkit-scrollbar {
+      width: 8px;
+    }
+    .slide::-webkit-scrollbar-track {
+      background: #e5e7eb;
+      border-radius: 4px;
+    }
+    .slide::-webkit-scrollbar-thumb {
+      background: #097235;
+      border-radius: 4px;
+    }
+    .slide::-webkit-scrollbar-thumb:hover {
+      background: #08632e;
+    }
+
+    .slide.active {
+      display: block;
+      opacity: 1;
+    }
+
+    h1, h2, h3 {
+      margin: 0 0 16px 0;
+      line-height: 1.2;
+    }
+    h1 {
+      font-size: 32px;
+      font-weight: 700;
+    }
+    h2 {
+      font-size: 26px;
+      font-weight: 700;
+    }
+    h3 {
+      font-size: 20px;
+      font-weight: 600;
+    }
+    p {
+      font-size: 14px;
+      line-height: 1.5;
+      margin: 0 0 12px 0;
+    }
+    ul {
+      margin: 8px 0 0 20px;
+      padding: 0;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+    li {
+      margin-bottom: 6px;
+    }
+    .tagline {
+      font-size: 16px;
+      color: #4b5563;
+      margin-bottom: 32px;
+    }
+    .pill {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: #abf2cf;
+      color: #178a2c;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 16px;
+      font-size: 12px;
+    }
+    th, td {
+      border: 1px solid #5f6061;
+      padding: 8px 10px;
+      text-align: left;
+      vertical-align: top;
+    }
+    th {
+      background: #32714e;
+      color: #34f37d;
+      font-weight: 600;
+    }
+    .two-col {
+      display: grid;
+      grid-template-columns: 1.15fr 1fr;
+      gap: 32px;
+      margin-top: 12px;
+    }
+    .three-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 24px;
+      margin-top: 16px;
+    }
+    .small {
+      font-size: 12px;
+      color: #5b9069;
+    }
+    .accent {
+      color: #2ae349;
+      font-weight: 600;
+    }
+    .accent-pink {
+      color: #db2777;
+      font-weight: 600;
+    }
+    .cta {
+      margin-top: 12px;
+      font-weight: 600;
+      color: #111827;
+    }
+    .formula {
+      font-family: "JetBrains Mono", "Fira Code", Menlo, monospace;
+      font-size: 12px;
+      background: #d3d4d6;
+      padding: 6px 10px;
+      border-radius: 6px;
+      margin-bottom: 4px;
+      display: inline-block;
+    }
+    .card {
+      background: #ffffff;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      padding: 12px;
+      margin-bottom: 12px;
+    }
+    .card h4 {
+      font-size: 14px;
+      font-weight: 600;
+      margin: 0 0 8px 0;
+      color: #2feb25;
+    }
+
+    .slide-2-top {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    margin-bottom: 32px;
+    /* padding-bottom: 32px; */
+    align-items: start;
+  }
+
+  .about-me {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .about-me h2 {
+      color: #2c9c00;
+      margin-bottom: 8px;
+    }
+
+  .about-me ul, .about-me p {
+      margin-top: -18px;
+    }
+
+  .project-indent {
+    text-indent: 36px;  /* або 2em */
+  }
+
+  .video-placeholder {
+      background: linear-gradient(135deg, #66b0209c 0%, #50912480 100%);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 42px;
+      margin-top: -92px;
+      margin-left: 84px;
+      text-align: center;
+      font-size: 10px;
+      color: #7fca38;
+      width: 90%;
+      min-height: 600px;
+    }
+
+    /* НАВІГАЦІЯ */
+    .nav {
+      position: fixed;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      z-index: 10;
+    }
+    .nav button {
+      padding: 8px 16px;
+      border-radius: 999px;
+      border: none;
+      background: #111827;
+      color: #f9fafb;
+      cursor: pointer;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      transition: background 0.2s;
+    }
+    .nav button:hover {
+      background: #374151;
+    }
+    .nav button:focus {
+      outline: 2px solid #28eb25;
+      outline-offset: 2px;
+    }
+    
+    .nav-indicator {
+      font-size: 10px;
+      color: #111827;
+      font-weight: 600;
+      min-width: 60px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="slides-container">
+    
+    <!-- SLIDE 1: COVER -->
+    <section class="slide active">
+      <div class="pill">Creative Marketing Test</div>
+      <h1>Nibble & BigoLive Agency</h1>
+      <p class="tagline">
+        Комплексний аналіз креативів, розробка ТЗ на рекламні матеріали та метрики ефективності для Meta.
+      </p>
+
+      <h3>Що всередині презентації</h3>
+      <ul>
+        <li>Про мене – професійний профіль та навички</li>
+        <li>Завдання 1 – аналіз продукту Nibble та його цільової аудиторії</li>
+        <li>Завдання 2 – технічні завдання на 4 креативи (2 для Nibble, 2 для BigoLive)</li>
+        <li>Завдання 3 – детальний аналіз метрик перформансу рекламних креативів</li>
+      </ul>
+
+      <p class="small" style="margin-top:24px;">
+        💡 <strong>Навігація:</strong> колесико миші, стрілки клавіатури або кнопки нижче. 
+        <br>На деяких слайдах можна скролити вміст прямо на слайді (внутрішнє скролювання).
+        <br>📱 Усього 11 слайдів.
+      </p>
+    </section>
+
+    <!-- SLIDE 2: ABOUT ME + VIDEO + INFO -->
+    <section class="slide">
+      <div class="pill">ABOUT ME</div>
+      <div class="slide-2-top">
+        <div class="about-me">
+          <h2>Про мене</h2>
+          <p>Я креативна фахівчиня з досвідом у розробці маркетингових стратегій і UGC-контенту для мобільних додатків.</p>
+          <h3>Мої навички:</h3>
+          <ul>
+            <li><strong>UGC-продюсування:</strong> Створення автентичного контенту, спрайтингу та режисури</li>
+            <li><strong>Аналіз аудиторії:</strong> Дослідження поведінки користувачів та їхніх болів</li>
+            <li><strong>Креативний бриф:</strong> Структурування ідей від концепції до готового контенту</li>
+            <li><strong>Маркетинг-аналітика:</strong> Розрахунок ефективності кампаній та ROI</li>
+          </ul>
+          <h3 style="margin-top:16px;">Про цей проєкт:</h3>
+          <p class="project-indent">
+            Комплексне виконання тестового завдання для Creative Marketing internship з аналізом продуктів Nibble та BigoLive.<br>
+            <p class="project-indent">
+            Тут я демонструю вміння поєднувати креативність з аналітикою: від рисерчу аудиторії до розробки ТЗ на креативи та детального аналізу метрик.
+            </p>
+          </p>
+        </div>
+        <div class="video-placeholder">
+          <video 
+            src="./Oksana_Kolisnyk_United_Tech_TestTask_AboutMe - Trim.mp4"
+            controls
+            autoplay
+            muted
+            loop
+            style="width: 100%; height: 440px; border-radius:12px; object-fit:cover; background:#000;">
+            Ваш браузер не підтримує відтворення відео.
+          </video>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 3: TASK 1 – NIBBLE AUDIENCE -->
+    <section class="slide">
+      <div class="pill">Завдання 1</div>
+      <h2>Аналіз продукту Nibble</h2>
+      <h3>Основні користувачі й їх потреби</h3>
+      
+      <div class="three-col">
+        <div class="card">
+          <h4>👥 Молодь 18–24</h4>
+          <p class="small">Студенти, які активні в соцмережах. Шукають нових друзів, новий досвід спілкування. Вагомо: анонімність, безпека, інтерактив.</p>
+        </div>
+        <div class="card">
+          <h4>💼 Молода дорослість 24–32</h4>
+          <p class="small">Профі в карʼєрі, виснажені від реального спілкування. Шукають легкого контакту в цифрі, можливість бути собою.</p>
+        </div>
+        <div class="card">
+          <h4>🌍 Інтроверти й нішеві спільноти</h4>
+          <p class="small">Люди, які мають нішеві інтереси (геймери, фотографи, художники). Потребують спілкування без соціального стресу.</p>
+        </div>
+      </div>
+
+      <h3 style="margin-top:20px;">Ключові болі й потреби</h3>
+      <table style="margin-top:12px;">
+        <thead>
+          <tr>
+            <th>Біль</th>
+            <th>Потреба</th>
+            <th>Як вирішує Nibble</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Самотність, відсутність нових знайомств</td>
+            <td>Швидкий пошук однодумців</td>
+            <td>Автоматичний підбір за інтересами, швидкий чат</td>
+          </tr>
+          <tr>
+            <td>Страх токсичності та насилля онлайн</td>
+            <td>Безпечне, модероване середовище</td>
+            <td>AI-модерація, анонімність, репутаційна система</td>
+          </tr>
+          <tr>
+            <td>Нудьга від традиційних чатів</td>
+            <td>Гейміфікована взаємодія, гравець та ментальність</td>
+            <td>Челенджи, рівні, нагороди за активність</td>
+          </tr>
+          <tr>
+            <td>Сором'язливість у спілкуванні</td>
+            <td>Анонімний старт без ризиків соціального осуду</td>
+            <td>Опція анонімного чату, можливість відкритися поступово</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- SLIDE 3: TASK 1 – CREATIVE THEMES -->
+    <section class="slide">
+      <div class="pill">Завдання 1</div>
+      <h2>Креативні теми, ідеї та хуки</h2>
+
+      <div class="card">
+        <h4>🎯 Тема 1: "Find Your People"</h4>
+        <p><strong>Ідея:</strong> Невелика приватна спільнота однодумців за твоїми інтересами. Без використання соцмережі, не треба пошуку групи.</p>
+        <p><strong>Хук:</strong> "Знайди друзів у Nibble за хвилину — без профілю, без затримок"</p>
+      </div>
+
+      <div class="card">
+        <h4>🛡️ Тема 2: "Safe Space for Real Talk"</h4>
+        <p><strong>Ідея:</strong> Анонімність + модерація = спілкування без страху й цензури.</p>
+        <p><strong>Хук:</strong> "Почни чат, залишаючись загадкою. Nibble — місце, де твоя приватність охороняється"</p>
+      </div>
+
+      <div class="card">
+        <h4>🎮 Тема 3: "Gamified Connection"</h4>
+        <p><strong>Ідея:</strong> Спілкування як гра — збирай нагороди, досягай рівнів, бери участь в чемпіонатах.</p>
+        <p><strong>Хук:</strong> "Кожне повідомлення — крок. Кожен рівень — нова можливість. Nibble — твоя гра з друзями"</p>
+      </div>
+
+      <div class="card">
+        <h4>💬 Тема 4: "No More Loneliness Algorithms"</h4>
+        <p><strong>Ідея:</strong> AI вибирає для тебе не на основі популярності, а на основі справжніх спільних інтересів.</p>
+        <p><strong>Хук:</strong> "Nibble — місце, де тебе завжди чекають. Не алгоритм, а справжні люди"</p>
+      </div>
+    </section>
+
+    <!-- SLIDE 4: TASK 2 – NIBBLE CREATIVES -->
+    <section class="slide">
+      <div class="pill">Завдання 2</div>
+      <h2>ТЗ для Nibble: Статичний креатив</h2>
+
+      <div class="two-col">
+        <div>
+          <h3>(1) Концепція</h3>
+          <p>Показати швидкість й простоту старту, радість від першого контакту з однодумцем.</p>
+
+          <h3 style="margin-top:16px;">(2) Цільова аудиторія</h3>
+          <p>Інтроверти й новачки соціалізації, молодь 18–28, які потребують безпечного простору.</p>
+
+          <h3 style="margin-top:16px;">(3) Біль / Потреба</h3>
+          <ul>
+            <li>Біль: "Я не знаю, як почати розмову"</li>
+            <li>Потреба: Автоматичний підбір, легкий старт без стресу</li>
+          </ul>
+
+          <h3 style="margin-top:16px;">Платформа</h3>
+          <p><strong>Meta:</strong> Facebook, Instagram (квадрат 1:1)</p>
+        </div>
+
+        <div>
+          <h3>Візуал</h3>
+          <ul>
+            <li>Портрет молодої людини + смартфон (на якому видна Nibble)</li>
+            <li>На фоні — легенька анімація чатів</li>
+            <li>Кольорова палітра: бірюзовий, ніжний фіолетовий, білий</li>
+            <li>Шрифт: сучасний, sans-serif, легкий</li>
+          </ul>
+
+          <h3 style="margin-top:16px;">Текст & CTA</h3>
+          <p><strong>Headline:</strong> "Find 👉YOUR👈 PEOPLE in seconds"</p>
+          <p class="cta"><strong>Body:</strong> "Nibble matches you with friends who get you. Anonymous. Safe. Real."</p>
+          <p class="cta"><strong>CTA:</strong> "Download Now"</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 5: TASK 2 – NIBBLE VIDEO -->
+    <section class="slide">
+      <div class="pill">Завдання 2</div>
+      <h2>ТЗ для Nibble: Відеокреатив</h2>
+
+      <div class="two-col">
+        <div>
+          <h3>(1) Концепція</h3>
+          <p>Показати реальний досвід: від моменту запуску до першого чату й радості від нового знайомства.</p>
+
+          <h3 style="margin-top:16px;">(2) Цільова аудиторія</h3>
+          <p>Молодь 16–30 років в TikTok, Instagram Reels, YouTube Shorts — ТІ, хто потребують соціального доказу й відгуку.</p>
+
+          <h3 style="margin-top:16px;">(3) Сценарій</h3>
+          <ul>
+            <li>0-3 сек: Екран смартфона — момент "Мені нууудно, хочу чата, хочу спілкувааання"</li>
+            <li>3-8 сек: Натискання на Nibble, автоматичний підбір, з'являються профілі</li>
+            <li>8-12 сек: Перший обмін повідомленнями, лайки, реакції</li>
+            <li>12-15 сек: Happy end — екран з фразою "New friend unlocked 🔓 - це так просто і легко ~~"</li>
+          </ul>
+        </div>
+
+        <div>
+          <h3>Технічні характеристики</h3>
+          <ul>
+            <li><strong>Формат:</strong> Вертикальне відео 9:16 (TikTok, Reels, Shorts)</li>
+            <li><strong>Тривалість:</strong> 15 сек max</li>
+            <li><strong>Звук:</strong> Трендовий біт, звуки UI, голос (опціонально)</li>
+            <li><strong>Кольори:</strong> Яскраві переходи, динаміка, movimento</li>
+            <li><strong>Платформа:</strong> TikTok, Instagram Reels, Facebook Feeds</li>
+          </ul>
+
+          <h3 style="margin-top:16px;">CTA</h3>
+          <p class="cta"><strong>Текст на екрані:</strong> "Download Nibble — Match ↔️ instantly"</p>
+          <p class="cta"><strong>Button:</strong> "Get App"</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 6: TASK 2 – BIGOLIVE CREATIVES -->
+    <section class="slide">
+      <div class="pill">Завдання 2</div>
+      <h2>ТЗ для BigoLive: Статичний креатив</h2>
+
+      <div class="two-col">
+        <div>
+          <h3>(1) Концепція</h3>
+          <p>Показати азарт стриму: ти — центр уваги, миттєвий фідбек від глядачів, можливість заробити й бути знаменитістю.</p>
+
+          <h3 style="margin-top:16px;">(2) Цільова аудиторія</h3>
+          <p>Амбітивні молоді люди 17–35 років, контент-мейкери, малі інфлюенсери, які хочуть використати всі плюси платформи.</p>
+
+          <h3 style="margin-top:16px;">(3) Біль / Потреба</h3>
+          <ul>
+            <li>Біль: "Я хочу стати знаменитістю, але де почати?"</li>
+            <li>Потреба: Глобальна аудиторія, охоплюваність, легка  монетизація та соціальний статус.</li>
+          </ul>
+        </div>
+
+        <div>
+          <h3>Візуал</h3>
+          <ul>
+            <li>Селфі молодої людини на фоні стриму (RGB світло, енергія)</li>
+            <li>Діаманти/подарунки летять по екрану</li>
+            <li>Лічильник глядачів: 1K → 10K → 100K+</li>
+            <li>Палітра: рожевий, фіолетовий, чорний, вибуховий ефект</li>
+          </ul>
+
+          <h3 style="margin-top:16px;">Текст & CTA</h3>
+          <p><strong>Headline:</strong> "Go live. Get discovered. Get paid.✅"</p>
+          <p class="cta"><strong>Body:</strong> "Millions of viewers. Real earnings. Your time to shine."</p>
+          <p class="cta"><strong>CTA:</strong> "Start Streaming"</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 7: TASK 2 – BIGOLIVE VIDEO -->
+    <section class="slide">
+      <div class="pill">Завдання 2</div>
+      <h2>ТЗ для BigoLive: Відеокреатив</h2>
+
+      <div class="two-col">
+        <div>
+          <h3>(1) Концепція</h3>
+          <p>Показати екстремальний ріст аудиторії за один стрім: з 0 до кількатисяч глядачів, подарунки, реакції чату.</p>
+
+          <h3 style="margin-top:16px;">(2) Сценарій</h3>
+          <ul>
+            <li>0-2 сек: Чорний екран → натиск "GO LIVE" → камера включається</li>
+            <li>2-6 сек: Перші глядачі з'являються (лічильник: 1 → 50 → 200)</li>
+            <li>6-10 сек: Подарунки летять, лайки зростають, чат експлодує</li>
+            <li>10-14 сек: Фінальний кадр з числом: "Joined 50K+ creators earning on BigoLive 😉"</li>
+          </ul>
+
+          <h3 style="margin-top:16px;">Звук & Ефекти</h3>
+          <ul>
+            <li>Енергійна музика, звуки подарунків, реакції чату</li>
+            <li>Динамічні переходи, числові лічильники та ефекти частинок (партикли).</li>
+          </ul>
+        </div>
+
+        <div>
+          <h3>Технічні характеристики</h3>
+          <ul>
+            <li><strong>Формат:</strong> Вертикальне 9:16 або квадрат 1:1</li>
+            <li><strong>Тривалість:</strong> 14 сек</li>
+            <li><strong>Платформа:</strong> TikTok, Instagram Reels, Facebook</li>
+            <li><strong>Кольорова палітра:</strong> Рожевий (#ff1458), фіолетовий (#7c2ae8), чорний, білий</li>
+          </ul>
+
+          <h3 style="margin-top:16px;">CTA</h3>
+          <p class="cta"><strong>Кінцева рамка:</strong> "BigoLive — Where creators earn ⭐️"</p>
+          <p class="cta"><strong>Button:</strong> "Apply Now" або "Download"</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 8: TASK 3 – METRICS INTRO -->
+    <section class="slide">
+      <div class="pill">Завдання 3</div>
+      <h2>Аналіз метрик перформансу креативів</h2>
+
+      <p>На основі даних 7 креативів з тестових кампаній аналізуємо ефективність і визначаємо, які передавати в масову реалізацію.</p>
+
+      <h3 style="margin-top:16px;">Ключові метрики для оцінки</h3>
+      <table style="margin-top:12px;">
+        <thead>
+          <tr>
+            <th>Метрика</th>
+            <th>Формула</th>
+            <th>Інтерпретація</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>CPM</strong> (Cost Per Mille)</td>
+            <td>Cost / (Impressions / 1000)</td>
+            <td>Вартість за 1000 показів. Нижче = краще (ефективна цільова аудиторія)</td>
+          </tr>
+          <tr>
+            <td><strong>CTR</strong> (Click-Through Rate)</td>
+            <td>Clicks / Impressions</td>
+            <td>% людей, що клікнули. Вищий CTR = більш привабливий і релевантний у залученні ЦА креатив</td>
+          </tr>
+          <tr>
+            <td><strong>CPA</strong> (Cost Per Action)</td>
+            <td>Cost / Subscriptions</td>
+            <td>Вартість залучення одного користувача/покупки. Нижче = краще</td>
+          </tr>
+          <tr>
+            <td><strong>Conversion Rate</strong></td>
+            <td>Subscriptions / Clicks</td>
+            <td>% клікерів, що стали підписниками. Вище = якісніший трафік</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- SLIDE 9: TASK 3 – TABLE & RECOMMENDATIONS -->
+    <section class="slide">
+      <div class="pill">Завдання 3</div>
+      <h2>Таблиця метрик й рекомендації</h2>
+
+      <table style="font-size:11px;">
+        <thead>
+          <tr>
+            <th>Ad</th>
+            <th>Cost, $</th>
+            <th>CPM, $</th>
+            <th>Impressions</th>
+            <th>CTR</th>
+            <th>Clicks</th>
+            <th>CPA, $</th>
+            <th>Subs</th>
+            <th>Conv.%</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="background-color:#28c60062;">
+            <td><strong>Creo 1</strong></td>
+            <td>17775</td>
+            <td>4.62</td>
+            <td>3,848,146</td>
+            <td>1.31%</td>
+            <td>50,512</td>
+            <td>–</td>
+            <td>–</td>
+            <td>–</td>
+          </tr>
+          <tr>
+            <td><strong>Creo 2</strong></td>
+            <td>721.29</td>
+            <td>3.01</td>
+            <td>239,457</td>
+            <td>1.31%</td>
+            <td>3,144</td>
+            <td>360.64</td>
+            <td>2</td>
+            <td>0.06%</td>
+          </tr>
+          <tr>
+            <td><strong>Creo 3</strong></td>
+            <td>858.38</td>
+            <td>7.42</td>
+            <td>115,703</td>
+            <td>2.07%</td>
+            <td>2,394</td>
+            <td>143.06</td>
+            <td>6</td>
+            <td>0.25%</td>
+          </tr>
+          <tr>
+            <td><strong>Creo 4</strong></td>
+            <td>1413</td>
+            <td>14.23</td>
+            <td>99,198</td>
+            <td>2.94%</td>
+            <td>2,917</td>
+            <td>176.62</td>
+            <td>8</td>
+            <td>0.27%</td>
+          </tr>
+          <tr style="background-color:#28c60062;">
+            <td><strong>Creo 5</strong></td>
+            <td>1915</td>
+            <td>5.86</td>
+            <td>441,085</td>
+            <td>2.68%</td>
+            <td>4,826</td>
+            <td>70.96</td>
+            <td>27</td>
+            <td>0.56%</td>
+          </tr>
+          <tr style="background-color:#28c60062;">
+            <td><strong>Creo 6</strong></td>
+            <td>9611</td>
+            <td>3.19</td>
+            <td>3,011,041</td>
+            <td>1.65%</td>
+            <td>48,448</td>
+            <td>56.97</td>
+            <td>169</td>
+            <td>0.35%</td>
+          </tr>
+          <tr>
+            <td><strong>Creo 7</strong></td>
+            <td>1363</td>
+            <td>5.12</td>
+            <td>266,300</td>
+            <td>1.65%</td>
+            <td>3,985</td>
+            <td>681.50</td>
+            <td>2</td>
+            <td>0.05%</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p class="small" style="margin-top:12px;">
+        <em>Зеленим фоном виділені кращі варіанти за балансом метрик (Creo 1, 5, 6)</em>
+      </p>
+    </section>
+
+    <!-- SLIDE 10: TASK 3 – FINAL RECOMMENDATIONS -->
+    <section class="slide">
+      <div class="pill">Завдання 3</div>
+      <h2>Рекомендації й висновки</h2>
+
+      <div class="three-col">
+        <div class="card">
+          <h4>✅ У основну закупку</h4>
+          <p><strong>Creo 6:</strong> найкраща окупність (169 subs), низька CPA ($56.97), стабільний CPM ($3.19). Масштабуватися можливо.</p>
+          <p><strong>Creo 5:</strong> гарний баланс (27 subs при $70.96 CPA), витримав масштаб, CTR 2.68%.</p>
+        </div>
+
+        <div class="card">
+          <h4>🔄 Повторно тестувати</h4>
+          <p><strong>Creo 2, 7:</strong> низька кількість підписок, але адекватний CPM. Можлива проблема в креативі, а не в аудиторії. Варто перепроектувати.</p>
+        </div>
+
+        <div class="card">
+          <h4>❌ На доопрацювання</h4>
+          <p><strong>Creo 1:</strong> немає даних по підпискам, але високий бюджет. Потребує детального аналізу причини.</p>
+          <p><strong>Creo 3, 4:</strong> висока CPA ($143–176), низька конверсія.</p>
+        </div>
+      </div>
+
+      <h3 style="margin-top:20px;">Фінальні висновки</h3>
+      <ul>
+        <li><strong>Найкраща окупність:</strong> <span class="accent">Creo 6</span> – $56.97 CPA, максимальні підписки (169), scalable</li>
+        <li><strong>Баланс CPA/CTR:</strong> <span class="accent">Creo 5</span> – 2.68% CTR, $70.96 CPA, 27 підписок на адекватному бюджеті</li>
+        <li><strong>Висновок:</strong> Масова закупка на основі Creo 5 і 6 з подальшим A/B тестуванням варіацій</li>
+      </ul>
+    </section>
+
+  </div>
+
+  <!-- НАВІГАЦІЯ -->
+  <div class="nav">
+    <button id="prevSlide">← Попередній</button>
+    <div class="nav-indicator"><span id="slideCounter">1</span>/10</div>
+    <button id="nextSlide">Наступний →</button>
+  </div>
+
+  <script>
+    const slides = document.querySelectorAll('.slide');
+    const slideCounter = document.getElementById('slideCounter');
+    let current = 0;
+
+    function showSlide(index) {
+      slides[current].classList.remove('active');
+      current = (index + slides.length) % slides.length;
+      slides[current].classList.add('active');
+      slideCounter.textContent = current + 1;
+    }
+
+    document.getElementById('nextSlide').addEventListener('click', () => {
+      showSlide(current + 1);
+    });
+
+    document.getElementById('prevSlide').addEventListener('click', () => {
+      showSlide(current - 1);
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ') {
+        e.preventDefault();
+        showSlide(current + 1);
+      } else if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        showSlide(current - 1);
+      }
+    });
+
+    document.addEventListener('wheel', (e) => {
+      e.preventDefault();
+      if (e.deltaY > 0) {
+        showSlide(current + 1);
+      } else {
+        showSlide(current - 1);
+      }
+    }, { passive: false });
+  </script>
+
+</body>
+</html>
